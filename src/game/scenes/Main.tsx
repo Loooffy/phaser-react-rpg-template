@@ -1,26 +1,23 @@
-import Phaser from 'phaser';
-import { render } from 'phaser-jsx';
+import { Physics, Scene, Tilemaps, Types } from 'phaser';
 
-import { TilemapDebug, Typewriter } from '../components';
 import {
   Depth,
   key,
   TilemapLayer,
   TilemapObject,
   TILESET_NAME,
-} from '../constants';
-import { Player } from '../sprites';
-import { state } from '../state';
+} from '../../constants';
+import { Player } from '../../sprites';
 
-interface Sign extends Phaser.Physics.Arcade.StaticBody {
+interface Sign extends Physics.Arcade.StaticBody {
   text?: string;
 }
 
-export class Main extends Phaser.Scene {
+export default class Main extends Scene {
   private player!: Player;
   private sign!: Sign;
-  private tilemap!: Phaser.Tilemaps.Tilemap;
-  private worldLayer!: Phaser.Tilemaps.TilemapLayer;
+  private tilemap!: Tilemaps.Tilemap;
+  private worldLayer!: Tilemaps.TilemapLayer;
 
   constructor() {
     super(key.scene.main);
@@ -69,22 +66,6 @@ export class Main extends Phaser.Scene {
       this.tilemap.widthInPixels,
       this.tilemap.heightInPixels,
     );
-
-    render(<TilemapDebug tilemapLayer={this.worldLayer} />, this);
-
-    state.isTypewriting = true;
-    render(
-      <Typewriter
-        text="WASD or arrow keys to move."
-        onEnd={() => (state.isTypewriting = false)}
-      />,
-      this,
-    );
-
-    this.input.keyboard!.on('keydown-ESC', () => {
-      this.scene.pause(key.scene.main);
-      this.scene.launch(key.scene.menu);
-    });
   }
 
   private addPlayer() {
@@ -116,24 +97,12 @@ export class Main extends Phaser.Scene {
     );
     this.sign.text = sign.properties[0].value;
 
-    type ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
+    type ArcadeColliderType = Types.Physics.Arcade.ArcadeColliderType;
 
     this.physics.add.overlap(
       this.sign as unknown as ArcadeColliderType,
       this.player.selector as unknown as ArcadeColliderType,
-      (sign) => {
-        if (this.player.cursors.space.isDown && !state.isTypewriting) {
-          state.isTypewriting = true;
-
-          render(
-            <Typewriter
-              text={(sign as unknown as Sign).text!}
-              onEnd={() => (state.isTypewriting = false)}
-            />,
-            this,
-          );
-        }
-      },
+      undefined,
       undefined,
       this,
     );

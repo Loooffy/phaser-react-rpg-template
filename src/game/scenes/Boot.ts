@@ -1,9 +1,9 @@
 import { Scene } from 'phaser';
 
-import * as assets from '../assets';
-import { key } from '../constants';
+import * as assets from '../../assets';
+import { key } from '../../constants';
 
-export class Boot extends Scene {
+export default class Boot extends Scene {
   constructor() {
     super(key.scene.boot);
   }
@@ -19,6 +19,9 @@ export class Boot extends Scene {
   }
 
   create() {
-    this.scene.start(key.scene.main);
+    import('./Main').then(({ default: Main }) => {
+      this.scene.add('Main', Main);
+      this.scene.start('Main');
+    });
   }
 }
