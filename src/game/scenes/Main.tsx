@@ -6,8 +6,8 @@ import {
   TilemapLayer,
   TilemapObject,
   TILESET_NAME,
-} from '../../constants';
-import { Player } from '../../sprites';
+} from '../constants';
+import { Player } from '../sprites';
 
 interface Sign extends Physics.Arcade.StaticBody {
   text?: string;

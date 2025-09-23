@@ -1,4 +1,5 @@
 import Boot from './scenes/Boot';
+import Main from './scenes/Main';
 
 export const config = {
   width: 960, // 1024
@@ -6,7 +7,7 @@ export const config = {
   title: 'Phaser RPG',
   url: import.meta.env.VITE_APP_HOMEPAGE,
   version: import.meta.env.VITE_APP_VERSION,
-  scene: [Boot],
+  scene: [Boot, Main],
   physics: {
     default: 'arcade',
     arcade: {
