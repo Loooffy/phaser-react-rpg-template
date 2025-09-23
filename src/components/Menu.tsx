@@ -25,7 +25,7 @@ export default function Menu() {
         <h2 className="card-title">Menu</h2>
         <p>Hello RPG</p>
         <div className="justify-end card-actions">
-          <button className="btn btn-secondary" onClick={handleCloseMenu}>
+          <button className="btn btn-neutral" onClick={handleCloseMenu}>
             OK
           </button>
         </div>

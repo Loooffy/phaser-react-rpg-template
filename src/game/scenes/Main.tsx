@@ -1,5 +1,6 @@
 import { Physics, Scene, Tilemaps, Types } from 'phaser';
 
+import { useGameStore } from '../../zustand/store';
 import {
   Depth,
   key,
@@ -99,13 +100,19 @@ export default class Main extends Scene {
 
     type ArcadeColliderType = Types.Physics.Arcade.ArcadeColliderType;
 
-    this.physics.add.overlap(
-      this.sign as unknown as ArcadeColliderType,
-      this.player.selector as unknown as ArcadeColliderType,
-      undefined,
-      undefined,
-      this,
-    );
+    this.input.keyboard!.on('keyup-SPACE', () => {
+      const overlapping = this.physics.overlap(
+        this.player.selector as unknown as ArcadeColliderType,
+        this.sign as unknown as ArcadeColliderType,
+      );
+      if (overlapping) {
+        const showMessageBox = useGameStore.getState().showMessageBox;
+        useGameStore.setState({
+          message: this.sign.text,
+          showMessageBox: !showMessageBox,
+        });
+      }
+    });
   }
 
   update() {
