@@ -21,7 +21,7 @@ Or, open the game app from other devices on LAN and connect via `http://<you-loc
 
 This template provides basic player movement controls and a React Menu Component.
 
-Use `WASD` to move the player, and `ESC` to toggle the menu.
+Use `WASD` to move the player, `ESC` to toggle the menu, and `SPACE` to trigger messagebox when the player is facing the sign.
 
 ## Develope
 

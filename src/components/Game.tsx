@@ -1,7 +1,9 @@
 import { Game } from 'phaser';
 import { useLayoutEffect } from 'react';
 
-import { config } from './game/config';
+import { config } from '../game/config';
+import Menu from './Menu';
+import MessageBox from './MessageBox';
 
 const gameContainerId = 'game-container';
 
@@ -13,5 +15,10 @@ export default function PhaserGame() {
     };
   }, []);
 
-  return <div id={gameContainerId}></div>;
+  return (
+    <div id={gameContainerId}>
+      <Menu />
+      <MessageBox />
+    </div>
+  );
 }

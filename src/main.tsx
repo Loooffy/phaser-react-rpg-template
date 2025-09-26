@@ -3,14 +3,10 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Menu from './components/Menu';
-import MessageBox from './components/MessageBox';
-import PhaserGame from './PhaserGame';
+import Game from './components/Game';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <PhaserGame />
-    <Menu />
-    <MessageBox />
+    <Game />
   </React.StrictMode>,
 );
