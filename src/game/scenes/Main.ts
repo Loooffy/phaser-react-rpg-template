@@ -1,6 +1,5 @@
-import { Physics, Scene, Tilemaps, Types } from 'phaser';
+import { Physics, Scene, Tilemaps } from 'phaser';
 
-import { useGameStore } from '../../zustand/store';
 import {
   Depth,
   key,
@@ -9,6 +8,7 @@ import {
   TILESET_NAME,
 } from '../constants';
 import { Player } from '../sprites';
+import { getUiFsm, UiFsm } from '../state/UiFsm';
 
 interface Sign extends Physics.Arcade.StaticBody {
   text?: string;
@@ -19,6 +19,7 @@ export default class Main extends Scene {
   private sign!: Sign;
   private tilemap!: Tilemaps.Tilemap;
   private worldLayer!: Tilemaps.TilemapLayer;
+  private uiFsm!: UiFsm;
 
   constructor() {
     super(key.scene.main);
@@ -60,6 +61,9 @@ export default class Main extends Scene {
 
     this.addPlayer();
 
+    this.uiFsm = getUiFsm(this, this.player);
+    this.uiFsm.init();
+
     // Set the bounds of the camera
     this.cameras.main.setBounds(
       0,
@@ -97,22 +101,10 @@ export default class Main extends Scene {
       sign.height,
     );
     this.sign.text = sign.properties[0].value;
+  }
 
-    type ArcadeColliderType = Types.Physics.Arcade.ArcadeColliderType;
-
-    this.input.keyboard!.on('keyup-SPACE', () => {
-      const overlapping = this.physics.overlap(
-        this.player.selector as unknown as ArcadeColliderType,
-        this.sign as unknown as ArcadeColliderType,
-      );
-      if (overlapping) {
-        const showMessageBox = useGameStore.getState().showMessageBox;
-        useGameStore.setState({
-          message: this.sign.text,
-          showMessageBox: !showMessageBox,
-        });
-      }
-    });
+  public getSign() {
+    return this.sign;
   }
 
   update() {
