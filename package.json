@@ -17,7 +17,7 @@
   "homepage": "https://remarkablegames.org/phaser-rpg/",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.14",
-    "@tailwindcss/vite": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.15",
     "@vitejs/plugin-react-swc": "^4.1.0",
     "phaser": "3.90.0",
     "phaser-jsx": "0.13.7",
