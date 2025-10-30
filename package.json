@@ -28,9 +28,9 @@
   "devDependencies": {
     "@commitlint/cli": "20.1.0",
     "@commitlint/config-conventional": "20.0.0",
-    "@eslint/compat": "1.4.0",
+    "@eslint/compat": "1.4.1",
     "@eslint/eslintrc": "3.3.1",
-    "@eslint/js": "9.36.0",
+    "@eslint/js": "9.38.0",
     "@types/gtag.js": "0.0.20",
     "@types/react": "19.2.0",
     "@types/react-dom": "^19.1.9",
